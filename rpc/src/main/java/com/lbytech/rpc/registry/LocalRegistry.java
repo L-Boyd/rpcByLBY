@@ -3,6 +3,9 @@ package com.lbytech.rpc.registry;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 本地注册中心
+ */
 public class LocalRegistry {
 
     /**
