@@ -1,10 +1,20 @@
 package com.lbytech.rpc.server.impl;
 
+import com.lbytech.rpc.handler.HttpServerHandler;
 import com.lbytech.rpc.server.HttpServer;
 import io.vertx.core.Vertx;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Vertx HTTP服务器
+ */
+@Slf4j
 public class VertxHttpServer implements HttpServer {
 
+    /**
+     * 启动服务器
+     * @param port
+     */
     @Override
     public void doStart(int port) {
         // 创建Vert.x实例
@@ -14,23 +24,15 @@ public class VertxHttpServer implements HttpServer {
         io.vertx.core.http.HttpServer server = vertx.createHttpServer();
 
         //监听端口并处理请求
-        server.requestHandler(request -> {
-            //处理HTTP请求
-            System.out.println("Received request:" + request.method() + " " + request.uri());
-
-            //发送HTTP响应
-            request.response()
-                    .putHeader("content-type", "text/plain")
-                    .end("Hello from Vert.x HTTP server!");
-        });
+        server.requestHandler(new HttpServerHandler());
 
         //启动HTTP服务器并监听指定端口
         server.listen(port, result -> {
             if (result.succeeded()) {
-                System.out.println("server is listening on port: " + port);
+                log.info("server is listening on port: " + port);
             }
             else {
-                System.err.println("Failed to start server: " + result.cause());
+                log.error("Failed to start server: " + result.cause());
             }
         });
     }
