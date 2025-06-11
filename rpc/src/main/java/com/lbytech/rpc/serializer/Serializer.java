@@ -9,12 +9,12 @@ public interface Serializer {
 
     /**
      * 序列化
-     * @param obj
+     * @param object
      * @return
      * @param <T>
      * @throws IOException
      */
-    <T> byte[] serialize(T obj) throws IOException;
+    <T> byte[] serialize(T object) throws IOException;
 
     /**
      * 反序列化
