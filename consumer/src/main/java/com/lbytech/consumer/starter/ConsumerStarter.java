@@ -2,12 +2,13 @@ package com.lbytech.consumer.starter;
 
 import com.lbytech.common.model.User;
 import com.lbytech.common.service.UserService;
+import com.lbytech.consumer.proxy.UserServiceStaticProxy;
 
 public class ConsumerStarter {
 
     public static void main(String[] args) {
-        //todo 需要获取UserService的实现类对象
-        UserService userService = null;
+        // 测试静态代理
+        UserService userService = new UserServiceStaticProxy();
 
         User user = new User();
         user.setName("lby");
