@@ -2,13 +2,14 @@ package com.lbytech.consumer.starter;
 
 import com.lbytech.common.model.User;
 import com.lbytech.common.service.UserService;
+import com.lbytech.consumer.proxy.ServiceProxyFactory;
 import com.lbytech.consumer.proxy.UserServiceStaticProxy;
 
 public class ConsumerStarter {
 
     public static void main(String[] args) {
-        // 测试静态代理
-        UserService userService = new UserServiceStaticProxy();
+        // 测试动态代理
+        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
 
         User user = new User();
         user.setName("lby");
